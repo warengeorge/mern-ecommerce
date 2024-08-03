@@ -5,8 +5,9 @@ import ProductController from '../controllers/products.js';
 const productRoutes = Router();
 
 productRoutes.get('/', ProductController.getProducts);
+productRoutes.get('/search', ProductController.searchProducts);
 productRoutes.get('/:id', ProductController.getProductById);
 productRoutes.post('/', upload.array('files'), ProductController.createProduct);
-productRoutes.get('/search', ProductController.searchProducts);
+
 
 export default productRoutes;

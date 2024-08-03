@@ -59,23 +59,15 @@ const getProductById = async (req, res) => {
 
 // Search for products using indexing 
 const searchProducts = async (req, res) => {
-  const { query } = req.query;
+  const [[key, value]] = Object.entries(req.query);
+
   try {
-    const products = await Product.find({ 
-      $text: { 
-        $search: query,
-        $caseSensitive: false,
-        $diacriticSensitive: false,
-      }, 
-    })
-    .project({ score: { $meta: 'textScore' }, _id: 0})
-    .sort({ score: { $meta: 'textScore' } })
-    .limit(10).exec();
+    const products = await Product.find({ [key]: { $regex: value, $options: 'i' } }).sort({ createdAt: -1 });
 
     if (!products) {
       return res.status(404).json({ message: 'No products found' });
     }
-    return res.json(products);
+    return res.status(200).json(products);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
