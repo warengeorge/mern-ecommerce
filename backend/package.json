@@ -1,8 +1,8 @@
 {
-  "name": "backend",
+  "name": "backend-ecommerce-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "nodejs api",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
